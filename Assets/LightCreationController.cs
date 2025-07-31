@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
-
+using UnityEngine.SceneManagement;
 
 
 public class LightCreationController : MonoBehaviour
@@ -45,6 +45,13 @@ public class LightCreationController : MonoBehaviour
             if (instructionUIText != null)
                 instructionUIText.text = instructionText;
         }
+
+        if (videoPlayer != null)
+        {
+        videoPlayer.Stop();
+        videoPlayer.loopPointReached += OnVideoEnd;
+        }
+        
             
     }
 
@@ -88,4 +95,10 @@ public class LightCreationController : MonoBehaviour
             videoPlayer.Play();
         }
     }
+    
+
+    private void OnVideoEnd(VideoPlayer vp)
+{
+    SceneManager.LoadScene("Day 2"); // Make sure Scene2 is in your build settings
+}
 }
