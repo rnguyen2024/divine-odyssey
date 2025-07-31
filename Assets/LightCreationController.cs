@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
+
 
 
 public class LightCreationController : MonoBehaviour
 {
+
+    public VideoPlayer videoPlayer;
+
     [Header("Light Settings")]
     public Light directionalLight;
     public float lightIntensity = 1.5f;
@@ -24,6 +29,7 @@ public class LightCreationController : MonoBehaviour
 
     void Start()
     {
+        
         if (directionalLight != null)
         {
             directionalLight.intensity = 0f;
@@ -39,6 +45,7 @@ public class LightCreationController : MonoBehaviour
             if (instructionUIText != null)
                 instructionUIText.text = instructionText;
         }
+            
     }
 
     void Update()
@@ -75,5 +82,10 @@ public class LightCreationController : MonoBehaviour
 
         if (visualElements != null)
             visualElements.SetActive(true);
+
+
+        if (videoPlayer != null){
+            videoPlayer.Play();
+        }
     }
 }
