@@ -9,13 +9,13 @@ public class WaterDragReveal : MonoBehaviour
     public GameObject bottomLayerGround;
 
     [Header("Drag Settings")]
-    public float maxDragDistance = 100f; // Pixels the player must drag downward
-    public float waterMoveAmount = 5f;   // How far the water should spread (Unity units)
-    public float waterMoveSpeed = 5f;    // Movement smoothing
+    public float maxDragDistance = 60f; // Pixels the player must drag downward
+    public float waterMoveAmount = 10f;   // How far the water should spread (Unity units)
+    public float waterMoveSpeed = 2f;    // Movement smoothing
 
     [Header("Sun and Clouds")]
     public Transform sun;
-    public float sunMoveAmount = 2f;     // How far the sun should descend
+    public float sunMoveAmount = 3f;     // How far the sun should descend
     public float sunMoveSpeed = 2f;
     public SpriteRenderer cloud1;
     public SpriteRenderer cloud2;
@@ -24,6 +24,11 @@ public class WaterDragReveal : MonoBehaviour
     [Header("UI Message")]
     public Text messageText; // Assign a UI Text object in the Inspector
     public float messageDisplayTime = 4f;
+
+    [Header("Void Background")]
+    public SpriteRenderer voidBackground; // Assign this in the Inspector
+    public float backgroundFadeAmount = 1f; // Full fade from opaque to transparent
+
 
     private Vector2 dragStart;
     private bool isDragging = false;
@@ -48,6 +53,19 @@ public class WaterDragReveal : MonoBehaviour
 
         if (messageText != null)
             messageText.text = ""; // Start with empty message
+
+        if (cloud1 != null)
+        {
+            Color c = cloud1.color;
+            c.a = 0f;
+            cloud1.color = c;
+        }
+        if (cloud2 != null)
+        {
+            Color c = cloud2.color;
+            c.a = 0f;
+            cloud2.color = c;
+        }
     }
 
     void Update()
@@ -92,9 +110,18 @@ public class WaterDragReveal : MonoBehaviour
         // Animate Cloud Fade
         if (animateExtras)
         {
-            FadeOutCloud(cloud1);
-            FadeOutCloud(cloud2);
+            FadeInCloud(cloud1);
+            FadeInCloud(cloud2);
         }
+
+        // Fade out the void background based on drag progress
+        if (voidBackground != null)
+        {
+            Color bgColor = voidBackground.color;
+            bgColor.a = Mathf.Lerp(1f, 1f - backgroundFadeAmount, dragProgress);
+            voidBackground.color = bgColor;
+        }
+
     }
 
     void RevealGround()
@@ -124,6 +151,16 @@ public class WaterDragReveal : MonoBehaviour
         color.a = Mathf.MoveTowards(color.a, 0f, Time.deltaTime * cloudFadeSpeed);
         cloud.color = color;
     }
+
+    void FadeInCloud(SpriteRenderer cloud)
+    {
+        if (cloud == null) return;
+
+        Color color = cloud.color;
+        color.a = Mathf.MoveTowards(color.a, 1f, Time.deltaTime * cloudFadeSpeed);
+        cloud.color = color;
+    }
+
 
     System.Collections.IEnumerator HideMessageAfterSeconds(float seconds)
     {
