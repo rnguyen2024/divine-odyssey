@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WaterDragReveal : MonoBehaviour
 {
+    
+    
     [Header("Water Objects")]
     public Transform leftWater;
     public Transform rightWater;
@@ -66,6 +69,7 @@ public class WaterDragReveal : MonoBehaviour
             c.a = 0f;
             cloud2.color = c;
         }
+    
     }
 
     void Update()
@@ -167,5 +171,7 @@ public class WaterDragReveal : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         if (messageText != null)
             messageText.text = "";
+            SceneManager.LoadScene("Day 3");
     }
+    
 }
