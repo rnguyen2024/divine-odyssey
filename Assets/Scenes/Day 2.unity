@@ -1158,12 +1158,12 @@ MonoBehaviour:
   leftWater: {fileID: 927808256}
   rightWater: {fileID: 636937493}
   bottomLayerGround: {fileID: 0}
-  maxDragDistance: 90
-  waterMoveAmount: 10
+  maxDragDistance: 120
+  waterMoveAmount: 13
   waterMoveSpeed: 2
   sun: {fileID: 1489958533}
   sunMoveAmount: 3
-  sunMoveSpeed: 2
+  sunMoveSpeed: 2.5
   cloud1: {fileID: 355006537}
   cloud2: {fileID: 1977166396}
   cloudFadeSpeed: 1
