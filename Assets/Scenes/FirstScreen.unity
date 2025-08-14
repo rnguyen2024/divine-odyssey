@@ -489,7 +489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Day 1: Exit the darkness by using the light as guidance'
+  m_text: 'Objective: Exit the darkness by using the light as guidance'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 972b9eb7df97b0b46b30791fb64bea89, type: 2}
   m_sharedMaterial: {fileID: 468713508686145852, guid: 972b9eb7df97b0b46b30791fb64bea89, type: 2}
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
