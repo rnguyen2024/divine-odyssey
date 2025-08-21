@@ -3,21 +3,30 @@ using UnityEngine.UI; // Needed for UI Slider
 
 public class EnergyGauge : MonoBehaviour
 {
+    public static EnergyGauge Instance; // Singleton reference
+
     [Header("Energy Settings")]
-    public float maxEnergy = 100f;      // Maximum possible energy
-    public float drainDuration = 60f;   // How long until it hits 0 (in seconds)
+    public float maxEnergy = 100f;      
+    public float drainDuration = 60f;   
     
-    private float energyLevel;          // Current energy value
+    private float energyLevel;          
 
     [Header("UI")]
-    public Slider energySlider;         // UI Slider for gauge display
+    public Slider energySlider;         
+
+    void Awake()
+    {
+        // Make sure only one EnergyGauge exists
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     void Start()
     {
-        // Start with full energy
         energyLevel = maxEnergy;
 
-        // Set up UI slider
         if (energySlider != null)
         {
             energySlider.minValue = 0;
@@ -28,12 +37,10 @@ public class EnergyGauge : MonoBehaviour
 
     void Update()
     {
-        // Drain energy over time
         if (energyLevel > 0)
         {
             energyLevel -= (maxEnergy / drainDuration) * Time.deltaTime;
             energyLevel = Mathf.Clamp(energyLevel, 0, maxEnergy);
-
             UpdateGauge();
         }
     }
@@ -44,14 +51,12 @@ public class EnergyGauge : MonoBehaviour
             energySlider.value = energyLevel;
     }
 
-    // Call this method to refill energy (optional)
     public void RefillEnergy(float amount)
     {
         energyLevel = Mathf.Clamp(energyLevel + amount, 0, maxEnergy);
         UpdateGauge();
     }
 
-    // Get the percentage of energy remaining
     public float GetEnergyPercent()
     {
         return energyLevel / maxEnergy;

@@ -7,5 +7,6 @@ public class StartScreen : MonoBehaviour
     {
         // Replace "GameScene" with your actual game scene name
         SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameUI");
     }
 }
